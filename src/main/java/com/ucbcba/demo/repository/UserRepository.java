@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
 public interface UserRepository extends CrudRepository<User, Integer> {
 
     @Query("SELECT u FROM User u ORDER BY u.cantComentarios DESC")
-    Iterable<User> getUsuariosCometadores();
+    Iterable<User> findTop3UsuariosCometadores();
 
     User findByUsername(String username);
 

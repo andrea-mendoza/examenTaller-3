@@ -14,5 +14,5 @@ public interface UserService {
 
     void deleteUser(Integer id);
 
-    Iterable<User> getUsuariosCometadores();
+    Iterable<User> findTop3UsuariosCometadores();
 }

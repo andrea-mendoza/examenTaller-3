@@ -302,13 +302,13 @@ public class RestaurantController {
 
     @RequestMapping(value = "/userCommet", method = RequestMethod.GET)
     String userComment(Model model){
-        model.addAttribute("usersComment",userService.getUsuariosCometadores());
+        model.addAttribute("usersComment",userService.findTop3UsuariosCometadores());
         return "topUsersComment";
     }
 
     @RequestMapping(value = "/restaurantComment", method = RequestMethod.GET)
     String restaurantComment(Model model){
-        model.addAttribute("resComment",restaurantService.getRestaurantsComentados());
+        model.addAttribute("resComment",restaurantService.findTop3RestaurantsComentados());
         return "topRestaurants";
     }
 

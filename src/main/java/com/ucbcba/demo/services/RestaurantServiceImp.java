@@ -82,8 +82,8 @@ public class RestaurantServiceImp implements RestaurantService {
     }
 
     @Override
-    public Iterable<Restaurant> getRestaurantsComentados() {
-        return restaurantRepository.getRestaurantsComentados();
+    public Iterable<Restaurant> findTop3RestaurantsComentados() {
+        return restaurantRepository.findTop3RestaurantsComentados();
     }
 
 }

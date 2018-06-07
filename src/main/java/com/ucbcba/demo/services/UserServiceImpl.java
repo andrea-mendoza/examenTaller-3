@@ -36,8 +36,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Iterable<User> getUsuariosCometadores() {
-        return userRepository.getUsuariosCometadores();
+    public Iterable<User> findTop3UsuariosCometadores() {
+        return userRepository.findTop3UsuariosCometadores();
     }
 
     @Override

@@ -36,7 +36,7 @@ public interface RestaurantRepository extends CrudRepository<Restaurant,Integer>
     Iterable<Restaurant> getRestaurantByName(@Param("name") String name);
 
     @Query("SELECT r FROM Restaurant r ORDER BY r.cantComentarios DESC")
-    Iterable<Restaurant> getRestaurantsComentados();
+    Iterable<Restaurant> findTop3RestaurantsComentados();
 
     public Iterable<Restaurant> findTop5ByOrderByScoreDesc();
 }
