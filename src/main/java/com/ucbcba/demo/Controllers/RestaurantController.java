@@ -308,7 +308,7 @@ public class RestaurantController {
 
     @RequestMapping(value = "/restaurantComment", method = RequestMethod.GET)
     String restaurantComment(Model model){
-        model.addAttribute("resComment",restaurantService.findTop3RestaurantsComentados());
+        model.addAttribute("resComment",restaurantService.findTop3ByRestaurantsComentados());
         return "topRestaurants";
     }
 

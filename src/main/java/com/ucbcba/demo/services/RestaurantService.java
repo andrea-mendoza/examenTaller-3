@@ -30,5 +30,5 @@ public interface RestaurantService {
 
     Iterable<Restaurant> listGeneralRanking();
 
-    Iterable<Restaurant> findTop3RestaurantsComentados();
+    Iterable<Restaurant> findTop3ByRestaurantsComentados();
 }
