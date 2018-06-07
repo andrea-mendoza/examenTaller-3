@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Comentarios</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>
+            Nombre Usuario
+        </th>
+        <th>
+            Cantidad comentarios
+        </th>
+    </tr>
+    <tr th:each="user : ${usersComment}">
+        <td th:text="${user.username}">
+        </td>
+        <td th:text="${user.cantComentarios}">
+        </td>
+    </tr>
+</table>
+</body>
+</html>

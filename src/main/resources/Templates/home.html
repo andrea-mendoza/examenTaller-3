@@ -1,0 +1,84 @@
+<!doctype html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head  lang="es">
+    <title> Home </title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css" th:href="@{/css/bootstrap.css}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash" rel="stylesheet"/>
+    <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<header>
+<div class="main_menu_bg">
+    <div class="container">
+        <div class="row">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li th:if="${username!='not logged in'}"><a href="/logout"> Cerrar Sesion </a></li>
+                            <li th:if="${user.role=='ADMIN'}"><a href="/ADMIN"> ADMINISTRADOR </a></li>
+                            <li th:if="${username=='not logged in'}"><a href="/registration"> Registrar </a></li>
+                            <li th:if="${username=='not logged in'}"><a href="/login"> Iniciar Sesion </a></li>
+                            <li><a href="/userCommet"> Top Users Comentaristas</a></li>
+                            <li><a href="/restaurantComment"> Top Restaurants comentados</a></li>
+                            <li><a href="/login"> Top Usuarios Calificadores </a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li th:if="${username!='not logged in'}"><a th:href="${'/profile/' + user.id}"> Perfil </a></li>
+                            <li><p th:text="${username}"></p></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+</header>
+
+<section id="slider" class="slider">
+    <div class="slider_overlay">
+        <p><a th:href="${'/ranking'}">
+            <img src="../static/images/ranking-img.png" th:src="@{/images/ranking-img.png}" alt="ranking general" style="width: 70px; heigth:70px;"/>
+        </a></p>
+        <div class="container">
+            <div class="row">
+                <div class="main_slider text-center">
+                    <div class="col-md-12">
+                        <div class="main_slider_content wow zoomIn" data-wow-duration="1s">
+                            <h1> TROFIMA </h1>
+                            <div>
+                                <form style="display:flex" action="/search" method="get">
+                                <select id="ciudad" name="ciudad" style="width: 300px; color:orange" class="form-control" >
+                                    <option value="0">Todas las ciudades</option>
+                                    <option style="color:orange"
+                                            th:each="city : ${cities}"
+                                            th:value="${city.id}"
+                                            th:text="${city.name}"></option>
+                                </select>
+                                    <input class="form-control my-0 py-1" type="text" id ="name" name="name" placeholder="Search..." aria-label="Search" style="color:orange"/>
+                                    <input value = "Buscar" type="submit" class="btn btn-secondary" style="color:orange; background-color: rgba(1, 1, 36, 0.56);"/>
+                                </form>
+                            </div>
+                        </div>
+                        <!--<td th:each="category : ${categories}" method="get">-->
+                            <!--<a th:href="${'/search'}" id="categoria" name="categoria" th:text="${category.name}" class="btn btn-secondary"  style="margin: 0px; color:orange; background-color: rgba(1, 1, 36, 0.56);"></a>-->
+                        <!--</td>-->
+                        <form action="/search" method="get">
+                            <td th:each="category : ${categories}" method="get">
+                                <button type="submit" id="categoria" name="categoria" th:value="${category.id}"
+                                        th:text="${category.name}" class="btn btn-secondary"
+                                        style="margin: 0px; color:orange; background-color: rgba(1, 1, 36, 0.56);"
+                                ></button>
+                            </td>
+                        </form>
+                        <a class="btn btn-secondary"  th:href="${'/rankingCategorias'}"  style="margin: 0px; color:orange; background-color: rgba(1, 1, 36, 0.56);"> Ranking Categorias</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

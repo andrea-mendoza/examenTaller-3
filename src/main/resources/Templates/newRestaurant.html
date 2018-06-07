@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Nuevo Restaurante</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css"/>
+    <style>
+        .container{
+            color: orange;
+        }
+    </style>
+    <style>
+         div#gmap {
+        width: 80%;
+        height: 500px;
+        border:double;
+    }
+    </style>
+    <script type="text/javascript"  src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCTuazTT4ftRrTOscHQYPabgJPLiBS9YXc">  </script>
+
+    <script   type="text/javascript">
+        var map;
+        function initialize() {
+
+
+            var myLatlng = new google.maps.LatLng(-17.371794,-66.143639);
+            var myOptions = {
+                zoom:16,
+                center: myLatlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+            map = new google.maps.Map(document.getElementById("gmap"), myOptions);
+            // marker refers to a global variable
+
+
+            google.maps.event.addListener(map, "click", function(event) {
+                // get lat/lon of click
+                var clickLat = event.latLng.lat();
+                var clickLon = event.latLng.lng();
+
+                // show in input box
+                document.getElementById("lat").value = clickLat.toFixed(5);
+                document.getElementById("lon").value = clickLon.toFixed(5);
+
+                  var marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(clickLat,clickLon),
+                        map: map
+                     });
+            });
+    }
+
+     window.onload = function () { initialize() };
+    </script>
+</head>
+<body style="background-color: #00002D;">
+<form th:action="@{/ADMIN}" method="POST">
+    <button class="btn btn-secondary" style="color:orange; background-color: #00002D; border:none;" type="submit"><span class="glyphicon glyphicon-circle-arrow-left"></span></button>
+</form>
+<div class="container">
+    <div class="page-header">
+        <h2><strong>Nuevo restaurante</strong></h2>
+    </div>
+    <form autocomplete="off" th:action="@{/restaurant}"  method="POST"
+        th:object="${restaurant}" enctype="multipart/form-data">
+        <p>Ingrese el nombre</p>
+        <input class="form-control my-0 py-1" style="min-width: 100%; color: orange;" type="text" th:field="*{name}" placeholder="Nombre" required="required"/>
+        <p>Ingrese Direccion Principal: </p>
+        <input class="form-control my-0 py-1" style="min-width: 100%; color: orange;" type="text" th:field="*{direction}" placeholder="Direccion" required="required"/>
+        <p>Ingrese el telefono: </p>
+        <input class="form-control my-0 py-1" style="min-width: 100%; color: orange;" type="text" th:field="*{phone}" placeholder="Telefono" required="required"/>
+        <br />
+        <select class="form-control" style="width: 250px; color: orange;" th:field="*{category}">
+            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+        </select>
+        <br/>
+        <select class="form-control" style="width: 250px; color: orange;" th:field="*{city}">
+            <option th:each="city : ${cities}" th:value="${city.id}" th:text="${city.name}"></option>
+        </select>
+        <br />
+        <input type="file" name="file" id="foto" required="required"/>
+        <br/>
+        <input type="hidden" id="lat" th:field="*{latitude}" th:value="latitude"/>
+        <input type="hidden" id="lon" th:field="*{longitude}" th:value="longitude"/>
+        <div id="gmap"></div>
+        <br/>
+        <button class="btn btn-secondary" style="color: #00002D; background-color: orange;" type="submit" >Crear restaurant</button>
+    </form>
+</div>
+</body>
+</html>
